@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neuro Editor AI - Pro Video & Audio Viral Studio</title>
+    <!-- AdSense Script Placeholder: Replace ca-pub-XXXXXXXXXXXXXXXX with your ID -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+    <style>
+        :root {
+            --bg: #060b14;
+            --card: #0f172a;
+            --border: #1e293b;
+            --cyan: #00e5ff;
+            --purple: #9333ea;
+            --green: #10b981;
+            --pink: #ec4899;
+            --text: #ffffff;
+            --muted: #94a3b8;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 78px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        /* AdSense Containers */
+        .ad-box {
+            width: 100%;
+            background: #111827;
+            border: 1px dashed #334155;
+            border-radius: 10px;
+            min-height: 60px;
+            margin: 8px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
+            padding: 6px;
+        }
+        .sticky-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background: #090d16;
+            border-top: 2px solid var(--cyan);
+            z-index: 990;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        /* Interstitial & Popup Ad Modals */
+        .ad-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .ad-popup-card {
+            background: #1e293b;
+            border: 2px solid var(--cyan);
+            border-radius: 16px;
+            padding: 16px;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.35);
+        }
+        .ad-large-slot {
+            width: 100%;
+            height: 260px;
+            background: #0f172a;
+            border: 1px dashed var(--cyan);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 14px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 10px 0 14px;
+        }
+        .logo {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 8px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #00e5ff, #8a2be2, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(0, 229, 255, 0.35);
+        }
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(to right, #00e5ff, #c084fc, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+        .card-head {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Upload Grid */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .up-btn {
+            background: #162033;
+            border: 1px dashed #38bdf8;
+            border-radius: 12px;
+            padding: 12px 4px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .up-btn span { font-size: 22px; display: block; margin-bottom: 4px; }
+        .up-btn strong { font-size: 12px; display: block; color: #fff; }
+        .up-btn small { font-size: 10px; color: var(--muted); }
+        /* Canvas Preview */
+        .canvas-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            max-height: 440px;
+            background: #000;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            margin-bottom: 12px;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .live-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.75);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        /* Large, Clear Effect Buttons (3 Columns so every button is big and fully visible) */
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .fx-btn {
+            background: #162033;
+            border: 1px solid #28354d;
+            border-radius: 12px;
+            padding: 12px 6px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            color: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 76px;
+        }
+        .fx-btn.active {
+            border: 2px solid var(--pink);
+            background: rgba(236, 72, 153, 0.2);
+            color: #fff;
+        }
+        .fx-btn span {
+            font-size: 28px;
+            line-height: 1.2;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .more-btn {
+            background: linear-gradient(135deg, #0284c7, #6d28d9);
+            color: #fff;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* Sliders */
+        .slider-row {
+            margin-top: 10px;
+            background: #162033;
+            padding: 8px 10px;
+            border-radius: 10px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #cbd5e1;
+            margin-bottom: 4px;
+        }
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--cyan);
+            height: 6px;
+        }
+        /* Repeat Buttons */
+        .rep-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            margin-bottom: 7px;
+        }
+        .rep-btn {
+            background: #162033;
+            border: 1px solid #2d3c59;
+            color: #fff;
+            padding: 8px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .rep-btn.active {
+            background: var(--cyan);
+            color: #000;
+            border-color: var(--cyan);
+        }
+        /* Inputs & Checkboxes */
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            background: #090f1d;
+            border: 1px solid #2d3c59;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            outline: none;
+        }
+        .chk-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #162033;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+        .chk-row input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--cyan);
+            flex-shrink: 0;
+        }
+        .tools-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+        }
+        /* Action Buttons */
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 11px 10px;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-cyan { background: var(--cyan); color: #000; }
+        .btn-dark { background: #1e293b; color: #fff; border: 1px solid #334155; }
+        .btn-green { background: var(--green); color: #fff; }
+        .btn-grad {
+            width: 100%;
+            padding: 14px;
+            font-size: 14px;
+            color: #fff;
+            background: linear-gradient(90deg, #00e5ff, #8a2be2);
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+        .soc-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+            margin-top: 10px;
+        }
+        /* Full Screen 100 Effects Modal */
+        #allEffectsModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 11, 20, 0.98);
+            z-index: 5000;
+            flex-direction: column;
+            padding: 14px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .modal-scroll-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            overflow-y: auto;
+            padding-bottom: 40px;
+        }
+        /* Export Rendering Modal with Rotating 5-Second Large Ads */
+        #renderModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 11, 20, 0.98);
+            z-index: 8000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-align: center;
+        }
+        .prog-track {
+            width: 100%;
+            max-width: 380px;
+            height: 14px;
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .prog-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00e5ff, #10b981);
+            transition: width 0.2s linear;
+        }
+        .ad-timer-badge {
+            background: #ef4444;
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. STARTUP INTERSTITIAL LARGE AD -->
+    <div id="startupAd" class="ad-popup-overlay" style="display: flex;">
+        <div class="ad-popup-card">
+            <span style="font-size: 11px; color: #94a3b8;">SPONSORED ADVERTISEMENT</span>
+            <div class="ad-large-slot">
+                <strong>[AdSense Startup Large Ad 300x250]</strong>
+                <span style="font-size: 11px; color: #94a3b8; margin-top: 6px;">ایپ کھلتے ہی یہ بڑا اشتہار دکھائی دے گا</span>
+            </div>
+            <button class="btn btn-cyan" style="width: 100%; border-radius: 25px; padding: 12px;" onclick="closePopupAd('startupAd')">
+                Continue to Neuro Editor AI ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. INTERSTITIAL AD FOR "MORE 100" & "SOCIAL UPLOAD" -->
+    <div id="actionAdModal" class="ad-popup-overlay">
+        <div class="ad-popup-card">
+            <span style="font-size: 11px; color: #94a3b8;" id="actionAdTitle">SPONSORED ADVERTISEMENT</span>
+            <div class="ad-large-slot">
+                <strong id="actionAdSlotLabel">[AdSense Large Interstitial 300x250]</strong>
+                <span style="font-size: 11px; color: #94a3b8; margin-top: 6px;">یہاں آپ کا بڑا ایڈسینس اشتہار چلے گا</span>
+            </div>
+            <button class="btn btn-cyan" id="actionAdContinueBtn" style="width: 100%; border-radius: 25px; padding: 12px;">
+                Continue ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- TOP ALWAYS-ON BANNER AD -->
+    <div class="container" style="padding-bottom: 0;">
+        <div class="ad-box">
+            <span>ADVERTISEMENT</span>
+            <strong>[AdSense Top Header Banner 320x50]</strong>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">N</div>
+            <h1>Neuro Editor AI</h1>
+            <p>YouTube & TikTok Viral Studio • 100 Live Effects • HD Cleaner</p>
+        </div>
+
+        <!-- SECTION 1: UPLOAD -->
+        <div class="card">
+            <div class="card-head">
+                <span>🎬 1. Add Photo / Video & Song</span>
+                <span id="statusTxt" style="font-size: 11px; color: #34d399;">Ready</span>
+            </div>
+            <div class="upload-grid">
+                <label class="up-btn">
+                    <span>🖼️</span>
+                    <strong>Add Photo</strong>
+                    <small>HD Image</small>
+                    <input type="file" id="imgInput" accept="image/*" hidden>
+                </label>
+                <label class="up-btn">
+                    <span>🎥</span>
+                    <strong>Add Video</strong>
+                    <small>MP4 Clip</small>
+                    <input type="file" id="vidInput" accept="video/*" hidden>
+                </label>
+                <label class="up-btn">
+                    <span>🎵</span>
+                    <strong>Add Song</strong>
+                    <small>MP3 Audio</small>
+                    <input type="file" id="audInput" accept="audio/*" hidden>
+                </label>
+            </div>
+            <div class="chk-row">
+                <input type="checkbox" id="muteOrigVid" checked>
+                <label for="muteOrigVid">اپ لوڈ کردہ ویڈیو کی اپنی آواز بند رکھیں (صرف نیا گانا چلائیں) 🔇</label>
+            </div>
+        </div>
+
+        <!-- SECTION 2: LIVE STUDIO & 100 EFFECTS -->
+        <div class="card">
+            <div class="card-head">
+                <span>📺 2. Live Studio & 100 Effects</span>
+                <button class="more-btn" onclick="openMoreWithAd()">More (100) ☰</button>
+            </div>
+
+            <div class="canvas-box">
+                <div class="live-tag" id="activeFxTag">❄️ Snowfall • LIVE HD</div>
+                <canvas id="studioCanvas" width="540" height="960"></canvas>
+            </div>
+
+            <div style="font-size: 11px; color: var(--muted); margin-bottom: 8px;">
+                ✨ بنیادی ایفیکٹس (مکمل 100 بڑے بٹن دیکھنے کے لیے اوپر <strong>More (100)</strong> دبائیں):
+            </div>
+
+            <!-- 6 Large, Fully Clear Main Effect Buttons -->
+            <div class="effects-grid" id="mainEffectsGrid"></div>
+
+            <!-- HD Cleaner & Brightness Controls -->
+            <div class="slider-row">
+                <div class="slider-label">
+                    <span>🔍 Photo / Video Zoom</span>
+                    <span id="zoomVal">100%</span>
+                </div>
+                <input type="range" id="zoomRange" min="50" max="150" value="100">
+            </div>
+
+            <div class="slider-row">
+                <div class="slider-label">
+                    <span>☀️ Brightness & HD Clarity</span>
+                    <span id="brightVal">100%</span>
+                </div>
+                <input type="range" id="brightRange" min="60" max="160" value="100">
+            </div>
+
+            <div class="slider-row">
+                <div class="slider-label">
+                    <span>🎨 HD Contrast & Color Sharpness</span>
+                    <span id="contrastVal">100%</span>
+                </div>
+                <input type="range" id="contrastRange" min="70" max="160" value="100">
+            </div>
+
+            <button class="btn btn-cyan" style="width: 100%; margin-top: 10px;" onclick="autoCleanHD()">
+                ✨ One-Click HD Auto Clean & Brighten (تصویر صاف کریں)
+            </button>
+        </div>
+
+        <!-- MID BANNER AD -->
+        <div class="ad-box">
+            <span>ADVERTISEMENT</span>
+            <strong>[AdSense Middle Banner Ad]</strong>
+        </div>
+
+        <!-- VIRAL TOOLS -->
+        <div class="card">
+            <div class="card-head">
+                <span>🚀 YouTube, TikTok & Instagram Viral Tools</span>
+            </div>
+            <div class="tools-2col">
+                <div class="chk-row" style="margin-top:0;"><input type="checkbox" id="chkSub" checked><label for="chkSub">🔔 Subscribe + Bell</label></div>
+                <div class="chk-row" style="margin-top:0;"><input type="checkbox" id="chkWave" checked><label for="chkWave">🌈 Audio Waves</label></div>
+                <div class="chk-row" style="margin-top:0;"><input type="checkbox" id="chkZoom"><label for="chkZoom">🎥 Auto Zoom</label></div>
+                <div class="chk-row" style="margin-top:0;"><input type="checkbox" id="chkDisc"><label for="chkDisc">💿 Rotating Disc</label></div>
+                <div class="chk-row" style="margin-top:0;"><input type="checkbox" id="chkBorder"><label for="chkBorder">🖼️ Neon Border</label></div>
+                <div class="chk-row" style="margin-top:0;"><input type="checkbox" id="chkLine" checked><label for="chkLine">⏳ Timeline Bar</label></div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: AUDIO LOOP & POETRY -->
+        <div class="card">
+            <div class="card-head">
+                <span>🎛️ 3. Audio Loop, Clarity & Poetry</span>
+                <span id="loopBadge" style="color: var(--cyan); font-size: 12px;">Loop: 1x</span>
+            </div>
+
+            <div class="tools-2col" style="margin-bottom: 8px;">
+                <input type="text" id="poetryInput" placeholder="✍️ اردو یا انگلش شاعری...">
+                <input type="text" id="channelInput" placeholder="🏷️ @YourChannel">
+            </div>
+
+            <button class="btn btn-cyan" style="width: 100%; margin-bottom: 12px;" onclick="writeAIPoetry()">
+                🤖 Auto Write Aesthetic Poetry (AI)
+            </button>
+
+            <div style="font-size: 11px; font-weight: bold; margin-bottom: 6px;">
+                🔁 Repeat Song (ایک تصویر یا ویڈیو پر گانا کتنی بار چلے):
+            </div>
+
+            <div class="rep-grid">
+                <button class="rep-btn active" onclick="setLoop(1, this)">1x</button>
+                <button class="rep-btn" onclick="setLoop(2, this)">2x</button>
+                <button class="rep-btn" onclick="setLoop(3, this)">3x</button>
+                <button class="rep-btn" onclick="setLoop(4, this)">4x</button>
+                <button class="rep-btn" onclick="setLoop(5, this)">5x</button>
+            </div>
+            <div class="rep-grid">
+                <button class="rep-btn" onclick="setLoop(6, this)">6x</button>
+                <button class="rep-btn" onclick="setLoop(7, this)">7x</button>
+                <button class="rep-btn" onclick="setLoop(8, this)">8x</button>
+                <button class="rep-btn" onclick="setLoop(9, this)">9x</button>
+                <button class="rep-btn" onclick="setLoop(10, this)">10x</button>
+            </div>
+
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <input type="number" id="customLoopInput" min="1" max="10000" placeholder="اپنی مرضی کی تعداد (مثلاً 50 یا 100)">
+                <button class="btn btn-cyan" style="width: 90px;" onclick="applyCustomLoop()">Apply</button>
+            </div>
+
+            <div class="chk-row">
+                <input type="checkbox" id="audioEnhancer" checked>
+                <label for="audioEnhancer">🎙️ Crystal Clear Audio Enhancer (شور ختم کر کے آواز صاف کریں)</label>
+            </div>
+        </div>
+
+        <!-- SECTION 4: EXPORT & SOCIAL UPLOAD -->
+        <div class="card">
+            <div class="card-head">
+                <span>🚀 4. Export & Direct Social Upload</span>
+                <select id="qualitySel" style="width: auto; padding: 4px 8px;">
+                    <option value="720p">720p HD</option>
+                    <option value="1080p" selected>1080p Full HD</option>
+                </select>
+            </div>
+
+            <div class="tools-2col">
+                <button class="btn btn-dark" onclick="togglePlay()">▶️ Play / Pause</button>
+                <button class="btn btn-green" onclick="savePhoto()">📸 Save HD Photo</button>
+            </div>
+
+            <button class="btn btn-grad" onclick="startVideoExport()">
+                🎞️ Create & Download Video
+            </button>
+
+            <div style="text-align: center; font-size: 11px; color: var(--muted); margin-top: 10px;">
+                Direct Upload / Share to Social Platforms
+            </div>
+            <div class="soc-row">
+                <button class="btn" style="background: #ff0000; color: #fff;" onclick="triggerSocialAd('YouTube')">▶ YouTube</button>
+                <button class="btn" style="background: #111; color: #fff; border: 1px solid #333;" onclick="triggerSocialAd('TikTok')">🎵 TikTok</button>
+                <button class="btn" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: #fff;" onclick="triggerSocialAd('Instagram')">📸 Instagram</button>
+            </div>
+        </div>
+
+        <!-- SECTION 5: MULTI-AI CONNECTOR -->
+        <div class="card">
+            <div class="card-head">
+                <span>⚡ 5. Multi-AI API Connector</span>
+                <span id="aiBadge" style="font-size: 11px; color: #34d399;">● Ready</span>
+            </div>
+
+            <select id="aiSelect" style="margin-bottom: 8px;" onchange="updateAiUI()">
+                <option value="offline">Built-in Offline AI (Free)</option>
+                <option value="gemini">Google Gemini AI</option>
+                <option value="grok">xAI Grok</option>
+                <option value="chatgpt">OpenAI ChatGPT</option>
+                <option value="deepseek">DeepSeek AI</option>
+            </select>
+
+            <input type="text" id="apiKeyBox" placeholder="Paste API Key here..." style="margin-bottom: 8px;">
+
+            <div class="tools-2col">
+                <button class="btn btn-cyan" onclick="saveApiKey()">💾 Save API</button>
+                <button class="btn btn-dark" id="goToApiBtn" onclick="goToApiSite()">🔑 Get Free API ↗</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKY BOTTOM ALWAYS-ON AD -->
+    <div class="sticky-ad">
+        <span>SPONSORED</span>
+        <strong>[AdSense Sticky Bottom Banner 320x50 - Always Running]</strong>
+    </div>
+
+    <!-- FULL SCREEN 100 LARGE EFFECTS MODAL -->
+    <div id="allEffectsModal">
+        <div class="modal-header">
+            <h3 style="color: var(--cyan); font-size: 16px;">✨ All 100 Live Effects (مکمل 100 بڑے بٹن)</h3>
+            <button class="btn btn-dark" style="padding: 6px 12px;" onclick="closeAllEffects()">✖ Close</button>
+        </div>
+        <input type="text" id="fxSearchInput" placeholder="🔍 ایفیکٹ تلاش کریں (مثلاً Rain, Rose, Snow, Heart, Fire)..." style="margin-bottom: 10px;" oninput="filterEffects(this.value)">
+        <div class="modal-scroll-grid" id="allEffectsGrid"></div>
+    </div>
+
+    <!-- VIDEO RENDERING OVERLAY WITH ROTATING 5-SECOND LARGE ADS -->
+    <div id="renderModal">
+        <h2 style="color: var(--cyan); font-size: 18px;">🎬 Creating Your HD Video...</h2>
+        <p style="font-size: 12px; color: #cbd5e1; margin-top: 3px;">ویڈیو تیار ہو رہی ہے، براہ کرم انتظار کریں</p>
+
+        <div class="prog-track">
+            <div class="prog-fill" id="renderBar"></div>
+        </div>
+        <div id="renderPct" style="font-weight: bold; color: #34d399; font-size: 14px; margin-bottom: 12px;">0%</div>
+
+        <div class="ad-popup-card" style="max-width: 350px;">
+            <div class="ad-timer-badge" id="renderAdRotationBadge">Ad #1 • Next Ad in 5s</div>
+            <div class="ad-large-slot" id="renderAdSlotContent">
+                <strong>[AdSense Video Render Ad #1 - 300x250]</strong>
+                <span style="font-size: 11px; color: #94a3b8; margin-top: 6px;">ویڈیو بننے کے دوران ہر 5 سیکنڈ بعد نیا بڑا اشتہار چلے گا</span>
+            </div>
+        </div>
+    </div>
+
+    <video id="srcVideo" loop playsinline crossorigin="anonymous" hidden></video>
+    <audio id="srcAudio" crossorigin="anonymous" hidden></audio>
+
+    <script>
+        // ============================================================
+        // 1. 100 DISTINCT LIVE FALLING EFFECTS LIST
+        // ============================================================
+        const effects100 = [
+            { name: "Snowfall", icon: "❄️" }, { name: "Red Roses", icon: "🌹" }, { name: "Heavy Rain", icon: "🌧️" },
+            { name: "Sakura", icon: "🌸" }, { name: "Pink Hearts", icon: "💖" }, { name: "Gold Stars", icon: "✨" },
+            { name: "Autumn Leaves", icon: "🍂" }, { name: "Fire Sparks", icon: "🔥" }, { name: "Water Drops", icon: "💧" },
+            { name: "Butterflies", icon: "🦋" }, { name: "Sunflowers", icon: "🌻" }, { name: "Tulips", icon: "🌷" },
+            { name: "Hibiscus", icon: "🌺" }, { name: "White Blossom", icon: "🌼" }, { name: "Bouquet", icon: "💐" },
+            { name: "Four Leaf", icon: "🍀" }, { name: "Maple Leaf", icon: "🍁" }, { name: "Green Leaves", icon: "🍃" },
+            { name: "Sparkling Heart", icon: "💓" }, { name: "Red Hearts", icon: "❤️" }, { name: "Purple Hearts", icon: "💜" },
+            { name: "Blue Hearts", icon: "💙" }, { name: "Yellow Hearts", icon: "💛" }, { name: "Green Hearts", icon: "💚" },
+            { name: "Two Hearts", icon: "💕" }, { name: "Revolving Hearts", icon: "💞" }, { name: "Heart Ribbon", icon: "💝" },
+            { name: "Kiss Mark", icon: "💋" }, { name: "Diamonds", icon: "💎" }, { name: "Crowns", icon: "👑" },
+            { name: "Glowing Star", icon: "🌟" }, { name: "Shooting Star", icon: "🌠" }, { name: "Dizzy Stars", icon: "💫" },
+            { name: "Thunder Bolt", icon: "⚡" }, { name: "Rainbow", icon: "🌈" }, { name: "Crescent Moon", icon: "🌙" },
+            { name: "Full Moon", icon: "🌕" }, { name: "Bright Sun", icon: "☀️" }, { name: "Cloud Burst", icon: "☁️" },
+            { name: "Tornado", icon: "🌪️" }, { name: "Snowman", icon: "⛄" }, { name: "Ice Crystals", icon: "🧊" },
+            { name: "Bubbles", icon: "🫧" }, { name: "Confetti", icon: "🎊" }, { name: "Party Popper", icon: "🎉" },
+            { name: "Balloons", icon: "🎈" }, { name: "Gift Boxes", icon: "🎁" }, { name: "Magic Wand", icon: "🪄" },
+            { name: "Crystal Ball", icon: "🔮" }, { name: "Music Notes", icon: "🎵" }, { name: "Double Notes", icon: "🎶" },
+            { name: "Headphones", icon: "🎧" }, { name: "Microphone", icon: "🎤" }, { name: "Guitars", icon: "🎸" },
+            { name: "Gold Medals", icon: "🏅" }, { name: "Trophies", icon: "🏆" }, { name: "Fireworks", icon: "🎆" },
+            { name: "Sparklers", icon: "🎇" }, { name: "Lanterns", icon: "🏮" }, { name: "Candles", icon: "🕯️" },
+            { name: "Money Wings", icon: "💸" }, { name: "Dollar Bills", icon: "💵" }, { name: "Gold Coins", icon: "🪙" },
+            { name: "Cherries", icon: "🍒" }, { name: "Strawberries", icon: "🍓" }, { name: "Peaches", icon: "🍑" },
+            { name: "Apples", icon: "🍎" }, { name: "Oranges", icon: "🍊" }, { name: "Lemons", icon: "🍋" },
+            { name: "Grapes", icon: "🍇" }, { name: "Watermelon", icon: "🍉" }, { name: "Pineapples", icon: "🍍" },
+            { name: "Cupcakes", icon: "🧁" }, { name: "Candy", icon: "🍬" }, { name: "Lollipops", icon: "🍭" },
+            { name: "Donuts", icon: "🍩" }, { name: "Coffee Cups", icon: "☕" }, { name: "Feathers", icon: "🪶" },
+            { name: "Doves", icon: "🕊️" }, { name: "Eagles", icon: "🦅" }, { name: "Peacocks", icon: "🦚" },
+            { name: "Flamingos", icon: "🦩" }, { name: "Swans", icon: "🦢" }, { name: "Honeybees", icon: "🐝" },
+            { name: "Ladybugs", icon: "🐞" }, { name: "Dolphins", icon: "🐬" }, { name: "Tropical Fish", icon: "🐠" },
+            { name: "Seashells", icon: "🐚" }, { name: "Pearls", icon: "🦪" }, { name: "Rockets", icon: "🚀" },
+            { name: "UFOs", icon: "🛸" }, { name: "Planets", icon: "🪐" }, { name: "Earth Globes", icon: "🌍" },
+            { name: "Cameras", icon: "📸" }, { name: "Clapperboards", icon: "🎬" }, { name: "Eyes", icon: "👀" },
+            { name: "Smileys", icon: "😊" }, { name: "Heart Eyes", icon: "😍" }, { name: "Cool Glasses", icon: "😎" },
+            { name: "No Effect", icon: "🚫" }
+        ];
+
+        let currentFx = effects100[0];
+
+        function buildEffectGrids() {
+            const mainGrid = document.getElementById('mainEffectsGrid');
+            const allGrid = document.getElementById('allEffectsGrid');
+            mainGrid.innerHTML = '';
+            allGrid.innerHTML = '';
+
+            // First 6 large buttons on main screen
+            effects100.slice(0, 6).forEach((fx) => {
+                const btn = document.createElement('div');
+                btn.className = 'fx-btn' + (fx.name === currentFx.name ? ' active' : '');
+                btn.innerHTML = `<span>${fx.icon}</span>${fx.name}`;
+                btn.onclick = () => selectEffect(fx);
+                mainGrid.appendChild(btn);
+            });
+
+            // All 100 large buttons inside More modal
+            renderFilteredEffects(effects100);
+        }
+
+        function renderFilteredEffects(list) {
+            const allGrid = document.getElementById('allEffectsGrid');
+            allGrid.innerHTML = '';
+            list.forEach((fx) => {
+                const btn = document.createElement('div');
+                btn.className = 'fx-btn' + (fx.name === currentFx.name ? ' active' : '');
+                btn.innerHTML = `<span>${fx.icon}</span>${fx.name}`;
+                btn.onclick = () => {
+                    selectEffect(fx);
+                    closeAllEffects();
+                };
+                allGrid.appendChild(btn);
+            });
+        }
+
+        function filterEffects(query) {
+            const q = query.toLowerCase().trim();
+            const filtered = effects100.filter(f => f.name.toLowerCase().includes(q));
+            renderFilteredEffects(filtered);
+        }
+
+        function selectEffect(fx) {
+            currentFx = fx;
+            document.getElementById('activeFxTag').innerText = `${fx.icon} ${fx.name} • LIVE HD`;
+            buildEffectGrids();
+            initParticles();
+        }
+
+        // ============================================================
+        // 2. AD POPUP FLOWS (STARTUP, MORE 100, SOCIAL UPLOAD)
+        // ============================================================
+        function closePopupAd(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function openMoreWithAd() {
+            const modal = document.getElementById('actionAdModal');
+            document.getElementById('actionAdTitle').innerText = 'SPONSORED AD • UNLOCKING 100 EFFECTS';
+            document.getElementById('actionAdSlotLabel').innerText = '[AdSense Large Ad - Before 100 Effects]';
+            const btn = document.getElementById('actionAdContinueBtn');
+            btn.innerText = 'Open 100 Effects Studio ➔';
+            btn.onclick = () => {
+                modal.style.display = 'none';
+                document.getElementById('allEffectsModal').style.display = 'flex';
+            };
+            modal.style.display = 'flex';
+        }
+
+        function closeAllEffects() {
+            document.getElementById('allEffectsModal').style.display = 'none';
+        }
+
+        function triggerSocialAd(platform) {
+            const modal = document.getElementById('actionAdModal');
+            document.getElementById('actionAdTitle').innerText = `SPONSORED AD • ${platform.toUpperCase()} UPLOAD`;
+            document.getElementById('actionAdSlotLabel').innerText = `[AdSense Large Ad - ${platform} Export]`;
+            const btn = document.getElementById('actionAdContinueBtn');
+            btn.innerText = `Create & Share to ${platform} ➔`;
+            btn.onclick = () => {
+                modal.style.display = 'none';
+                startVideoExport(platform);
+            };
+            modal.style.display = 'flex';
+        }
+
+        // ============================================================
+        // 3. REAL-TIME AUDIO ANALYZER & STUDIO CANVAS ENGINE
+        // ============================================================
+        const canvas = document.getElementById('studioCanvas');
+        const ctx = canvas.getContext('2d');
+        const srcVideo = document.getElementById('srcVideo');
+        const srcAudio = document.getElementById('srcAudio');
+
+        let audioCtx, analyser, dataArray, audioSource, streamDest;
+
+        function initAudioEngine() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 128;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                audioSource = audioCtx.createMediaElementSource(srcAudio);
+                streamDest = audioCtx.createMediaStreamDestination();
+                audioSource.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                audioSource.connect(streamDest);
+            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        let loadedImage = null;
+        let isVideoMode = false;
+        let loopTarget = 1;
+        let loopCount = 0;
+
+        document.getElementById('imgInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const img = new Image();
+                img.onload = () => {
+                    loadedImage = img;
+                    isVideoMode = false;
+                    document.getElementById('statusTxt').innerText = 'Photo Ready';
+                };
+                img.src = ev.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('vidInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            srcVideo.src = URL.createObjectURL(file);
+            srcVideo.muted = document.getElementById('muteOrigVid').checked;
+            srcVideo.play();
+            isVideoMode = true;
+            loadedImage = null;
+            document.getElementById('statusTxt').innerText = 'Video Ready';
+        });
+
+        document.getElementById('muteOrigVid').addEventListener('change', function() {
+            srcVideo.muted = this.checked;
+        });
+
+        document.getElementById('audInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            initAudioEngine();
+            srcAudio.src = URL.createObjectURL(file);
+            loopCount = 0;
+            srcAudio.play();
+            document.getElementById('statusTxt').innerText = 'Song Playing';
+        });
+
+        srcAudio.addEventListener('ended', () => {
+            loopCount++;
+            if (loopCount < loopTarget) {
+                srcAudio.currentTime = 0;
+                srcAudio.play();
+            }
+        });
+
+        function setLoop(n, el) {
+            loopTarget = n;
+            loopCount = 0;
+            document.getElementById('loopBadge').innerText = `Loop: ${n}x`;
+            document.querySelectorAll('.rep-btn').forEach(b => b.classList.remove('active'));
+            if (el) el.classList.add('active');
+        }
+
+        function applyCustomLoop() {
+            const v = parseInt(document.getElementById('customLoopInput').value);
+            if (v && v > 0) {
+                document.querySelectorAll('.rep-btn').forEach(b => b.classList.remove('active'));
+                setLoop(v, null);
+                alert(`گانا اب ${v} مرتبہ مسلسل چلے گا!`);
+            }
+        }
+
+        // Sliders & One-Click HD Cleaner
+        const zoomRange = document.getElementById('zoomRange');
+        const brightRange = document.getElementById('brightRange');
+        const contrastRange = document.getElementById('contrastRange');
+
+        zoomRange.oninput = () => document.getElementById('zoomVal').innerText = zoomRange.value + '%';
+        brightRange.oninput = () => document.getElementById('brightVal').innerText = brightRange.value + '%';
+        contrastRange.oninput = () => document.getElementById('contrastVal').innerText = contrastRange.value + '%';
+
+        function autoCleanHD() {
+            brightRange.value = 118;
+            contrastRange.value = 122;
+            document.getElementById('brightVal').innerText = '118%';
+            document.getElementById('contrastVal').innerText = '122%';
+            alert('✨ تصویر/ویڈیو کو HD برائٹنیس اور کلین فلٹر لگا دیا گیا ہے!');
+        }
+
+        // Particles
+        let particles = [];
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 55; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 16 + 12,
+                    vy: Math.random() * 2.4 + 1,
+                    vx: (Math.random() - 0.5) * 1.4
+                });
+            }
+        }
+        initParticles();
+        buildEffectGrids();
+
+        let discRot = 0;
+        function renderCanvas() {
+            ctx.fillStyle = '#050811';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const z = (zoomRange.value / 100) * (document.getElementById('chkZoom').checked ? (1 + Math.sin(Date.now() / 1200) * 0.05) : 1);
+
+            ctx.save();
+            ctx.filter = `brightness(${brightRange.value}%) contrast(${contrastRange.value}%) saturate(112%)`;
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.scale(z, z);
+
+            if (isVideoMode && srcVideo.readyState >= 2) {
+                ctx.drawImage(srcVideo, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            } else if (loadedImage) {
+                const r = Math.min(canvas.width / loadedImage.width, canvas.height / loadedImage.height);
+                const w = loadedImage.width * r;
+                const h = loadedImage.height * r;
+                ctx.drawImage(loadedImage, -w / 2, -h / 2, w, h);
+            } else {
+                ctx.filter = 'none';
+                ctx.fillStyle = '#00e5ff';
+                ctx.font = 'bold 26px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Neuro Editor AI', 0, -15);
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '14px sans-serif';
+                ctx.fillText('Add Photo or Video + Song Above', 0, 15);
+            }
+            ctx.restore();
+
+            // Falling Particles
+            if (currentFx.name !== 'No Effect') {
+                particles.forEach(p => {
+                    p.y += p.vy;
+                    p.x += p.vx;
+                    if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * canvas.width; }
+                    ctx.font = `${p.size}px serif`;
+                    ctx.fillText(currentFx.icon, p.x, p.y);
+                });
+            }
+
+            // Channel Name
+            const ch = document.getElementById('channelInput').value;
+            if (ch) {
+                ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(ch, canvas.width / 2, 55);
+            }
+
+            // Poetry Text
+            const po = document.getElementById('poetryInput').value;
+            if (po) {
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.beginPath();
+                ctx.roundRect(28, 125, canvas.width - 56, 66, 12);
+                ctx.fill();
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 20px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(po, canvas.width / 2, 165);
+            }
+
+            // Real-Time Colorful Audio Waves
+            if (document.getElementById('chkWave').checked) {
+                if (analyser && !srcAudio.paused) analyser.getByteFrequencyData(dataArray);
+                const bars = 34;
+                const bw = 7;
+                const gap = 4;
+                const sx = (canvas.width - bars * (bw + gap)) / 2;
+                const cy = canvas.height - 175;
+                for (let i = 0; i < bars; i++) {
+                    let amp = 5;
+                    if (analyser && !srcAudio.paused && dataArray) {
+                        amp = Math.max(5, (dataArray[i % dataArray.length] / 255) * 68);
+                    }
+                    ctx.fillStyle = `hsl(${(i / bars) * 320}, 95%, 58%)`;
+                    ctx.beginPath();
+                    ctx.roundRect(sx + i * (bw + gap), cy - amp / 2, bw, amp, 4);
+                    ctx.fill();
+                }
+            }
+
+            // Subscribe + Bell + Like Overlay
+            if (document.getElementById('chkSub').checked) {
+                const pw = 220, ph = 38;
+                const px = (canvas.width - pw) / 2;
+                const py = canvas.height - 115;
+                ctx.strokeStyle = 'rgba(255, 59, 48, 0.75)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.roundRect(px, py, pw, ph, 20);
+                ctx.stroke();
+
+                ctx.font = '18px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('👍', px + 26, py + 25);
+
+                ctx.fillStyle = '#ff0000';
+                ctx.beginPath();
+                ctx.roundRect(px + 50, py + 5, 120, 28, 14);
+                ctx.fill();
+
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 12px sans-serif';
+                ctx.fillText('SUBSCRIBED', px + 110, py + 23);
+
+                ctx.font = '18px sans-serif';
+                ctx.fillText('🔔', px + 194, py + 25);
+            }
+
+            // Neon Border
+            if (document.getElementById('chkBorder').checked) {
+                ctx.strokeStyle = '#00e5ff';
+                ctx.lineWidth = 10;
+                ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - 10);
+            }
+
+            // Rotating Disc
+            if (document.getElementById('chkDisc').checked) {
+                discRot += 0.05;
+                ctx.save();
+                ctx.translate(canvas.width - 52, canvas.height - 95);
+                ctx.rotate(discRot);
+                ctx.fillStyle = '#111827';
+                ctx.beginPath();
+                ctx.arc(0, 0, 24, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#00e5ff';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.fillStyle = '#fff';
+                ctx.font = '16px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('🎵', 0, 6);
+                ctx.restore();
+            }
+
+            // Song Timeline Bar
+            if (document.getElementById('chkLine').checked) {
+                ctx.fillStyle = '#1e293b';
+                ctx.fillRect(30, canvas.height - 35, canvas.width - 60, 6);
+                const prog = srcAudio.duration ? (srcAudio.currentTime / srcAudio.duration) : 0.25;
+                ctx.fillStyle = '#00e5ff';
+                ctx.fillRect(30, canvas.height - 35, (canvas.width - 60) * prog, 6);
+            }
+
+            requestAnimationFrame(renderCanvas);
+        }
+        renderCanvas();
+
+        // ============================================================
+        // 4. AI POETRY & DIRECT MULTI-AI LINKS
+        // ============================================================
+        const sampleVerses = [
+            "دل کی باتیں خاموشی سے کہہ جاتے ہیں ✨",
+            "وقت بدلتا ہے مگر یادیں ہمیشہ رہتی ہیں 🥀",
+            "سکون صرف ان لمحوں میں ہے جو اپنوں ساتھ گزریں 🌙",
+            "محبت لفظوں کی نہیں احساس کی محتاج ہوتی ہے 💖"
+        ];
+        function writeAIPoetry() {
+            document.getElementById('poetryInput').value = sampleVerses[Math.floor(Math.random() * sampleVerses.length)];
+        }
+
+        const aiLinks = {
+            offline: { url: '', label: 'Built-in Offline Ready' },
+            gemini: { url: 'https://aistudio.google.com/app/apikey', label: '🔑 Go to Gemini API ↗' },
+            grok: { url: 'https://console.x.ai/', label: '🔑 Go to Grok API ↗' },
+            chatgpt: { url: 'https://platform.openai.com/api-keys', label: '🔑 Go to ChatGPT API ↗' },
+            deepseek: { url: 'https://platform.deepseek.com/api_keys', label: '🔑 Go to DeepSeek API ↗' }
+        };
+
+        function updateAiUI() {
+            const val = document.getElementById('aiSelect').value;
+            document.getElementById('goToApiBtn').innerText = aiLinks[val].label;
+        }
+
+        function goToApiSite() {
+            const val = document.getElementById('aiSelect').value;
+            if (val === 'offline') {
+                alert('آف لائن AI پہلے سے فعال ہے، اس کے لیے API کی ضرورت نہیں۔');
+            } else {
+                window.open(aiLinks[val].url, '_blank');
+            }
+        }
+
+        function saveApiKey() {
+            const val = document.getElementById('aiSelect').value;
+            const key = document.getElementById('apiKeyBox').value.trim();
+            if (val !== 'offline' && !key) {
+                alert('براہ کرم پہلے API Key پیسٹ کریں!');
+                return;
+            }
+            localStorage.setItem('neuro_ai_model', val);
+            localStorage.setItem('neuro_ai_key', key);
+            document.getElementById('aiBadge').innerText = `● Connected (${val.toUpperCase()})`;
+            alert('API Key محفوظ کر دی گئی ہے!');
+        }
+
+        // ============================================================
+        // 5. PLAY/PAUSE, PHOTO SAVE & VIDEO EXPORT WITH 5-SECOND ADS
+        // ============================================================
+        function togglePlay() {
+            initAudioEngine();
+            if (srcAudio.src) srcAudio.paused ? srcAudio.play() : srcAudio.pause();
+            if (isVideoMode) srcVideo.paused ? srcVideo.play() : srcVideo.pause();
+        }
+
+        function savePhoto() {
+            const a = document.createElement('a');
+            a.download = 'Neuro-Editor-AI-Photo.png';
+            a.href = canvas.toDataURL('image/png');
+            a.click();
+        }
+
+        function startVideoExport(targetPlatform = '') {
+            initAudioEngine();
+            const modal = document.getElementById('renderModal');
+            const bar = document.getElementById('renderBar');
+            const pct = document.getElementById('renderPct');
+            const adBadge = document.getElementById('renderAdRotationBadge');
+            const adSlot = document.getElementById('renderAdSlotContent');
+
+            modal.style.display = 'flex';
+            let adIndex = 1;
+            let secCounter = 5;
+
+            adBadge.innerText = `Ad #${adIndex} • Next Ad in ${secCounter}s`;
+            adSlot.innerHTML = `<strong>[AdSense Video Render Large Ad #${adIndex} - 300x250]</strong><span style="font-size:11px;color:#94a3b8;margin-top:6px;">ویڈیو بننے کے دوران ہر 5 سیکنڈ بعد نیا بڑا اشتہار چلے گا</span>`;
+
+            // Rotate large ad every 5 seconds during rendering
+            const adRotationTimer = setInterval(() => {
+                secCounter--;
+                if (secCounter <= 0) {
+                    adIndex++;
+                    secCounter = 5;
+                    adSlot.innerHTML = `<strong>[AdSense Video Render Large Ad #${adIndex} - 300x250]</strong><span style="font-size:11px;color:#94a3b8;margin-top:6px;">نیا ہائی ارننگ اشتہار لوڈ ہو گیا ہے</span>`;
+                }
+                adBadge.innerText = `Ad #${adIndex} • Next Ad in ${secCounter}s`;
+            }, 1000);
+
+            // Real Canvas + Audio Recording
+            const cStream = canvas.captureStream(30);
+            const tracks = [...cStream.getVideoTracks()];
+            if (streamDest && srcAudio.src) tracks.push(...streamDest.stream.getAudioTracks());
+            const combinedStream = new MediaStream(tracks);
+
+            let recorder;
+            try {
+                recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
+            } catch (e) {
+                recorder = new MediaRecorder(combinedStream);
+            }
+
+            const chunks = [];
+            recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            recorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Neuro-Editor-AI-Video.webm';
+                a.click();
+            };
+
+            if (srcAudio.src) { srcAudio.currentTime = 0; srcAudio.play(); }
+            if (isVideoMode) { srcVideo.currentTime = 0; srcVideo.play(); }
+            recorder.start();
+
+            // 12-second render cycle so multiple 5-second large ads display smoothly
+            let progress = 0;
+            const progTimer = setInterval(() => {
+                progress += 2;
+                bar.style.width = progress + '%';
+                pct.innerText = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(progTimer);
+                    clearInterval(adRotationTimer);
+                    recorder.stop();
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        bar.style.width = '0%';
+                        const msg = targetPlatform
+                            ? `آپ کی HD ویڈیو تیار ہو کر ڈاؤن لوڈ ہو گئی ہے! اب آپ اسے ${targetPlatform} پر اپ لوڈ کر سکتے ہیں۔`
+                            : 'مبارک ہو! آپ کی HD ویڈیو تیار ہو کر ڈاؤن لوڈ ہو گئی ہے۔';
+                        alert(msg);
+                    }, 400);
+                }
+            }, 240);
+        }
+    </script>
+</body>
+</html>
